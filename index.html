@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Rock Scissors Paper Game</title>
+</head>
+
+<script>
+  let rock = 'rock';
+  let paper = 'paper';
+  let scissors = 'scissors';
+  let computerChoice;
+  let playerChoice;
+
+  function computerPlay() {
+    let choice = Math.floor(Math.random() * 3 + 1);
+    if (choice == 1) {
+      computerChoice = rock;
+    } else if (choice == 2) {
+      computerChoice = paper;
+    } else {
+      computerChoice = scissors;
+    }
+  }
+
+  function rock() {
+    rock = 1;
+    paper = 2;
+    scissors = 3;
+  }
+
+  function convertToNum(x) {
+    x == 'rock' ?
+  }
+
+  function rockPaperScissors() {
+    let lowerPlayerChoice = playerChoice.toLowerCase();
+    computerPlay();
+  }
+
+</script>
+
+</html>
