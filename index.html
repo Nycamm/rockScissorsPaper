@@ -6,36 +6,43 @@
 </head>
 
 <script>
-  let rock = 'rock';
-  let paper = 'paper';
-  let scissors = 'scissors';
-  let computerChoice;
-  let playerChoice;
-
   function computerPlay() {
     let choice = Math.floor(Math.random() * 3 + 1);
     if (choice == 1) {
-      computerChoice = rock;
+      return 'rock';
     } else if (choice == 2) {
-      computerChoice = paper;
+      return 'paper';
     } else {
-      computerChoice = scissors;
+      return 'scissors';
     }
   }
 
-  function rock() {
-    rock = 1;
-    paper = 2;
-    scissors = 3;
-  }
+  function rockScissorsPaper(playerInput) {
+    let playerSelection = playerInput.toLowerCase();
+    computerSelection = computerPlay();
+    let result;
 
-  function convertToNum(x) {
-    x == 'rock' ?
-  }
+    let win = function() {
+      result = 'You win!';
+    }
 
-  function rockPaperScissors() {
-    let lowerPlayerChoice = playerChoice.toLowerCase();
-    computerPlay();
+    let loose = function() {
+      result = 'You loose!';
+    }
+
+    let tie = function() {
+      result = 'It\'s a tie!';
+    }
+
+    if (playerSelection == 'rock') {
+      computerSelection == 'paper' ? loose() : computerSelection == 'scissors' ? win() : tie();
+    } else if (playerSelection == 'paper') {
+      computerSelection == 'scissors' ? loose() : computerSelection == 'rock' ? win() : tie();
+    } else if (playerSelection == 'scissors') {
+      computerSelection == 'rock' ? loose() : computerSelection == 'paper' ? win() : tie();
+    } else {
+      result = 'You can\'t choose that!'
+    }
   }
 
 </script>
