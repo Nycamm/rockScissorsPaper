@@ -6,6 +6,24 @@
 </head>
 
 <script>
+  let playerInput;
+  let playerSelection;
+  let computerSelection;
+  let result;
+  let playerScore = 0;
+  let computerScore = 0;
+  let numberOfRounds = (playerScore + computerScore);
+  let begin = window.prompt('Type "yes" to begin');
+
+  if (begin == 'yes') {
+    for (; begin == 'yes';) {
+      game();
+    }
+    alert('Thanks for playing!');
+  } else {
+    alert('Ok, see you next time.')
+  }
+
   function computerPlay() {
     let choice = Math.floor(Math.random() * 3 + 1);
     if (choice == 1) {
@@ -17,17 +35,20 @@
     }
   }
 
-  function rockScissorsPaper(playerInput) {
-    let playerSelection = playerInput.toLowerCase();
+  function playRound() {
+    playerSelection = playerInput.toLowerCase();
     computerSelection = computerPlay();
-    let result;
 
     let win = function() {
       result = 'You win!';
+      playerScore++;
+      numberOfRounds++;
     }
 
     let loose = function() {
       result = 'You loose!';
+      computerScore++;
+      numberOfRounds++;
     }
 
     let tie = function() {
@@ -35,14 +56,42 @@
     }
 
     if (playerSelection == 'rock') {
-      computerSelection == 'paper' ? loose() : computerSelection == 'scissors' ? win() : tie();
+      computerSelection == 'paper' ? loose() : computerSelection == 'scissors' ?
+        win() : tie();
     } else if (playerSelection == 'paper') {
-      computerSelection == 'scissors' ? loose() : computerSelection == 'rock' ? win() : tie();
+      computerSelection == 'scissors' ? loose() : computerSelection == 'rock' ?
+        win() : tie();
     } else if (playerSelection == 'scissors') {
-      computerSelection == 'rock' ? loose() : computerSelection == 'paper' ? win() : tie();
+      computerSelection == 'rock' ? loose() : computerSelection == 'paper' ?
+        win() : tie();
     } else {
       result = 'You can\'t choose that!'
     }
+  }
+
+  function winner() {
+    alert('You win! ' + playerScore + ' to ' + computerScore + '.');
+  }
+
+  function looser() {
+    alert('Sorry, you loose ' + computerScore + ' to ' + playerScore + '.');
+  }
+
+  function game() {
+
+    for (; numberOfRounds < 5;) {
+      playerInput = window.prompt('Rock, scissors or paper?');
+      playRound();
+      alert(result);
+    };
+
+    playerScore > computerScore ? winner() : looser();
+
+    playerScore = 0;
+    computerScore = 0;
+    numberOfRounds = 0;
+
+    begin = window.prompt('Would you like to play again?');
   }
 
 </script>
