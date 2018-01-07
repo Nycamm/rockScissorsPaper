@@ -1,28 +1,68 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
   <title>Rock Scissors Paper Game</title>
 </head>
 
+<body>
+  <div class = "choice">
+    <button id = "rock">Rock</button>
+    <button id = "paper">Paper</button>
+    <button id = "scissors">Scissors</button>
+  </div>
+  <div class = "results"></div>
+  <div id = "player"></div>
+  <div id = "computer"></div>
+  <div id = "final"></div>
+
 <script>
-  let playerInput;
+  const results = document.querySelector('.results');
+  const buttons = document.querySelectorAll('button');
+  const playerDisplay = document.querySelector('#player');
+  const computerDisplay = document.querySelector('#computer');
+  const final = document.querySelector('#final');
   let playerSelection;
   let computerSelection;
-  let result;
+  let result = 'Pick one';
   let playerScore = 0;
   let computerScore = 0;
   let numberOfRounds = (playerScore + computerScore);
-  let begin = window.prompt('Type "yes" to begin');
 
-  if (begin == 'yes') {
-    for (; begin == 'yes';) {
+  results.textContent = 'Pick one';
+  playerDisplay.textContent = 'Player: 0';
+  computerDisplay.textContent = 'Computer: 0';
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', function(e) {
+      playerSelection = button.id;
       game();
-    }
-    alert('Thanks for playing!');
-  } else {
-    alert('Ok, see you next time.')
-  }
+    });
+  });
+
+  function finalScore() {
+    if (playerScore > computerScore) {
+      winner();
+    } else {
+      looser();
+    };
+  };
+
+  function game() {
+    if (numberOfRounds == 5) {
+      playerScore = 0;
+      computerScore = 0;
+      numberOfRounds = 0;
+      final.textContent = '';
+      playRound();
+    } else {
+      playRound();
+      if (numberOfRounds == 5) {
+        finalScore();
+      };
+    };
+  };
 
   function computerPlay() {
     let choice = Math.floor(Math.random() * 3 + 1);
@@ -36,7 +76,6 @@
   }
 
   function playRound() {
-    playerSelection = playerInput.toLowerCase();
     computerSelection = computerPlay();
 
     let win = function() {
@@ -67,33 +106,21 @@
     } else {
       result = 'You can\'t choose that!'
     }
+    results.textContent = result;
+    playerDisplay.textContent = "Player: " + playerScore;
+    computerDisplay.textContent = "Computer: " + computerScore;
   }
 
   function winner() {
-    alert('You win! ' + playerScore + ' to ' + computerScore + '.');
+    final.textContent = 'You win! ' + playerScore + ' to ' + computerScore + '.';
   }
 
   function looser() {
-    alert('Sorry, you loose ' + computerScore + ' to ' + playerScore + '.');
-  }
-
-  function game() {
-
-    for (; numberOfRounds < 5;) {
-      playerInput = window.prompt('Rock, scissors or paper?');
-      playRound();
-      alert(result);
-    };
-
-    playerScore > computerScore ? winner() : looser();
-
-    playerScore = 0;
-    computerScore = 0;
-    numberOfRounds = 0;
-
-    begin = window.prompt('Would you like to play again?');
+    final.textContent = 'Sorry, you loose ' + computerScore + ' to ' + playerScore + '.';
   }
 
 </script>
+
+</body>
 
 </html>
